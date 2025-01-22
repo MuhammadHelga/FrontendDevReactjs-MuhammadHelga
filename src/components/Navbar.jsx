@@ -4,12 +4,9 @@ import "../styles/Navbar.css";
 function Navbar({ setIsFilterOpenNow, setSelectedPrice, setSelectedCategory }) {
   const [isChecked, setIsChecked] = useState(false);
 
-  const handleFilterChange = () => {
-    setIsChecked((prev) => {
-      const newChecked = !prev;
-      setIsFilterOpenNow(newChecked);
-      return newChecked;
-    });
+  const handleFilterChange = (value) => {
+    setIsChecked(value === "OPEN");
+    setIsFilterOpenNow(value === "OPEN");
   };
 
   const handlePriceChange = (event) => {
@@ -30,14 +27,16 @@ function Navbar({ setIsFilterOpenNow, setSelectedPrice, setSelectedCategory }) {
   return (
     <nav>
       <p>Filter By :</p>
-      <label>
-        <input
-          type="checkbox"
-          checked={isChecked}
-          onChange={handleFilterChange}
-        />
-        OPEN NOW
-      </label>
+        <label>
+          <input
+            type="radio"
+            name="status"
+            value="OPEN"
+            checked={isChecked}
+            onChange={() => handleFilterChange("OPEN")}
+          />
+          OPEN NOW
+        </label>
 
       <label>
         <span>Price:</span>

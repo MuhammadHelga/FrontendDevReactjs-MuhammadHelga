@@ -33,6 +33,13 @@ label {
     border-radius: 4px;
     cursor: pointer;
     text-align: center;
+    transition: all 0.3s ease;
+}
+
+.clr:hover {
+    background-color: rgb(187, 187, 187);
+    color: #ffffff;
+    border-color: #ffffff;
 }
 
 @media (max-width: 768px) {

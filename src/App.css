@@ -27,6 +27,12 @@ h1 {
   background-color: #ffff;
 }
 
+.btn > button:hover {
+  background-color: #969595;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
 .resto-grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);

@@ -12,6 +12,7 @@ const App = () => {
   const [isFilterOpenNow, setIsFilterOpenNow] = useState(false);
   const [selectedPrice, setSelectedPrice] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [visibleCount, setVisibleCount] = useState(8);
 
   useEffect(() => {
     axios
@@ -47,6 +48,10 @@ const App = () => {
     setFilteredRestaurants(updatedRestaurants);
   }, [isFilterOpenNow, selectedPrice, selectedCategory, restaurants]);
 
+  const handleLoadMore = () => {
+    setVisibleCount((prevCount) => prevCount + 8);
+  };
+
   return (
     <Router>
       <Routes>
@@ -64,15 +69,17 @@ const App = () => {
                 setSelectedCategory={setSelectedCategory}
               />
               <div className="resto-grid">
-                {filteredRestaurants.map((restaurant) => (
+                {filteredRestaurants.slice(0, visibleCount).map((restaurant) => (
                   <RestaurantCard key={restaurant.id} restaurant={restaurant} />
                 ))}
               </div>
-              <div className="btn">
-                <button>
-                  LEARN MORE
-                </button>
-              </div>
+              {visibleCount < filteredRestaurants.length && (
+                <div className="btn">
+                  <button onClick={handleLoadMore}>
+                    LEARN MORE
+                  </button>
+                </div>
+              )}
             </div>
           }
         />
